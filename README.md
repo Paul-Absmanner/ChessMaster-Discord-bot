@@ -24,22 +24,22 @@ Make sure you have the following installed:
 
 1. Visit the [Discord Developer Portal](https://discord.com/developers/applications).
 2. Create a new application.
-3. On the left sidebar, select Bot und press **Reset Token**. Replace the **TOKEN** value in the **.env** with it.
-4. On the left sidebar, select OAuth2. From the **OAuth2 URL Generator** scopes List select **bot** and **applications.commands**
-
+3. On the left sidebar, select Bot, scroll down to **Privileged Gateway Intents**.
+4. Enable **Message Content Intent** (Required for processing message content directly)
+5. Scroll up and press **Reset Token** and save it for later.
+6. On the left sidebar, select OAuth2. From the **OAuth2 URL Generator** under **scopes List** select **bot** and **applications.commands**
+7. Select the permissions under **OAuth2 URL Generator** under **bot permission List**
 
 To operate correctly, the BOT requires the following permissions to be enabled on the server where it is hosted:
 
-1. **View Channels Permission**  
-   This permission allows the BOT to access all text channels where games can be played.
+- Send Messages
+- Manage Messages
+- Attach Files
+- Read Message History
+- View Channels
 
-2. **Send Messages Permission**  
-   Enables the BOT to send messages for game invitations, updates, and statistics in the text channels.
+8. Copy the generated URL and add the bot to your discord server.
 
-3. **Attach Files Permission**  
-   Allows the BOT to share images of the chessboard, showing the current game state, within the text channels.
-
-Select the permissions under **OAuth2 URL Generator** bot permission List
 
 [Detailed guide to creating a bot](https://www.ionos.at/digitalguide/server/knowhow/discord-bot-erstellen/#:~:text=Aktivieren%20Sie%20in%20Ihrem%20Discord,und%20klicken%20Sie%20%E2%80%9ECreate%E2%80%9C.)
 
