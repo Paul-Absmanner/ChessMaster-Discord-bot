@@ -51,11 +51,11 @@ Select the permissions under **OAuth2 URL Generator** bot permission List
 
 
 
-# Setup the Python Discord Bot
+# Setup the Python File
 
-## Replace `TOKEN` and `GUILD_ID`
+### Replace `TOKEN` and `GUILD_ID`
 
-1. Open the `.env` file in the project directory.
+1. Open the `.env.example` file in the project directory.
 2. Replace the placeholders with your bot token and discord server ID:
    ```bash
    TOKEN=YOUR_BOT_TOKEN
