@@ -23,7 +23,7 @@ Make sure you have the following installed:
 ### Step 2: Create a Bot in the Discord Developer Portal
 
 1. Visit the [Discord Developer Portal](https://discord.com/developers/applications).
-2. Create a new application, then add a bot user.
+2. Create a new application.
 3. On the left sidebar, select Bot und press **Reset Token**. Replace the **TOKEN** value in the **.env** with it.
 4. On the left sidebar, select OAuth2. From the **OAuth2 URL Generator** scopes List select **bot** and **applications.commands**
 
@@ -53,9 +53,7 @@ Select the permissions under **OAuth2 URL Generator** bot permission List
 
 # Setup the Python File
 
-### Replace `TOKEN` and `GUILD_ID`
-
-1. Open the `.env.example` file in the project directory.
+1. Open the `.env.example` file in the project directory and rename it to `.env`.
 2. Replace the placeholders with your bot token and discord server ID:
    ```bash
    TOKEN=YOUR_BOT_TOKEN
