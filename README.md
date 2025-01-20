@@ -25,7 +25,7 @@ Make sure you have the following installed:
 1. Visit the [Discord Developer Portal](https://discord.com/developers/applications).
 2. Create a new application.
 3. On the left sidebar, select Bot, scroll down to **Privileged Gateway Intents**.
-4. Enable **Message Content Intent** (Required for processing message content directly)
+4. Enable **Server Members Intent** (Required for processing message content directly)
 5. Scroll up and press **Reset Token** and save it for later.
 6. On the left sidebar, select OAuth2. From the **OAuth2 URL Generator** under **scopes List** select **bot** and **applications.commands**
 7. Select the permissions under **OAuth2 URL Generator** under **bot permission List**
@@ -33,15 +33,11 @@ Make sure you have the following installed:
 To operate correctly, the BOT requires the following permissions to be enabled on the server where it is hosted:
 
 - Send Messages
-- Manage Messages
 - Attach Files
-- Read Message History
 - View Channels
 
 8. Copy the generated URL and add the bot to your discord server.
 
-
-[Detailed guide to creating a bot](https://www.ionos.at/digitalguide/server/knowhow/discord-bot-erstellen/#:~:text=Aktivieren%20Sie%20in%20Ihrem%20Discord,und%20klicken%20Sie%20%E2%80%9ECreate%E2%80%9C.)
 
 
 ### Step 3: Copy the Server(GUILD_ID) ID from your discord server
