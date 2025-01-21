@@ -1,4 +1,4 @@
-discord.py==2.3.1 # install with pip not conda
+discord.py==2.3.1
 python-dotenv
 pillow
-chess #also install with pip
+chess

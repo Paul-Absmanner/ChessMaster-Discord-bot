@@ -21,12 +21,28 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 def render_chessboard(board):
     square_size = 80
     board_size = square_size * 8
-    img = Image.new("RGB", (board_size, board_size), "white")
+    border_size = 50
+    total_size = board_size + 2 * border_size
+    
+    #render of the image with a dark background for border
+    img = Image.new("RGB", (total_size, total_size), "#b58863")
     draw = ImageDraw.Draw(img)
 
     #colour for the squares of the board
     light_color = "#f0d9b5"
     dark_color = "#b58863"
+
+    #draw black border around the board
+    black_border_thickness = 5
+    chessboard_start = border_size - black_border_thickness
+    chessboard_end = board_size + border_size + black_border_thickness
+    draw.rectangle(
+        [chessboard_start, chessboard_start, chessboard_end, chessboard_end],
+        fill=None,
+        outline="black",
+        width=black_border_thickness,
+    )
+
 
     #draw squares
     for rank in range(8):
@@ -39,13 +55,15 @@ def render_chessboard(board):
             draw.rectangle([x0, y0, x1, y1], fill=color)
 
 
-    #load font(unicode chess font)
+    #load font for pieces and the labels (unicode chess font)
     try:
-        font = ImageFont.truetype("arial.ttf", 48)
+        piece_font = ImageFont.truetype("arial.ttf", 48)
+        label_font = ImageFont.truetype("arial.ttf", 24)
     except IOError:
-        font = ImageFont.load_default()
+        piece_font = ImageFont.load_default()
+        label_font = ImageFont.load_default()
 
-    #parse the FEN (information to construct game position)
+    #parse the FEN (information to construct game position) and draw pieces
     rows = board.board_fen().split("/")
     for rank, row in enumerate(rows):
         file = 0
@@ -57,8 +75,26 @@ def render_chessboard(board):
                 #chess piece
                 x = file * square_size + square_size // 4
                 y = rank * square_size + square_size // 4
-                draw.text((x, y), char, fill="black", font=font)
+                draw.text((x, y), char, fill="black", font=piece_font)
                 file += 1
+
+        #draw rank numbers (1-8) and left and right border
+    for rank in range(8):
+        y = rank * square_size + border_size + square_size // 2
+        rank_label = str(8 - rank)  #rank in reverse (8=top, 1=bottom)
+        #for left side
+        draw.text((border_size // 4, y - 12), rank_label, fill="white", font=label_font) 
+        #for right side
+        draw.text((total_size - border_size + border_size // 3, y - 12), rank_label, fill="white", font=label_font)
+
+
+    #draw letters on top and bottom "a" to "h"
+    for file in range(8):
+        x = file * square_size + border_size + square_size // 2
+        file_label = chr(ord('a') + file)
+        draw.text((x - 10, border_size // 4), file_label, fill="white", font=label_font)
+        draw.text((x - 10, total_size - border_size + border_size // 8), file_label, fill="white", font=label_font)
+
 
     #save the image of the chessboard
     img.save("chessboard.png")
