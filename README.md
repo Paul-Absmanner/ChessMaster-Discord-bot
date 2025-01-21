@@ -1,5 +1,4 @@
 # ChessMasterBot: Features & Setup
-# Project of Paul Absmanner (k12205739) and Maximilian Hammer (k12222785)
 
 This bot allows you to play chess directly in Discord, complete with:
 - **Real-time board rendering** (image updates after each move)
