@@ -61,15 +61,35 @@ async def show_piece_selection(interaction: discord.Interaction, player_id: int)
     guild = interaction.guild
     # Retrieve or fetch the player
     player = guild.get_member(player_id) or await guild.fetch_member(player_id)
+    
+    game_state = active_games[player_id]
+    board = game_state["board"]
 
     view = View()
-    for piece_name in PIECE_TYPES:
-        button = Button(label=piece_name, style=discord.ButtonStyle.primary)
+    for piece_name, piece_type in PIECE_TYPES.items():
+        # Check if there are any legal moves for this piece type
+        has_legal_moves = any(
+            board.piece_at(move.from_square).piece_type == piece_type
+            for move in board.legal_moves
+        )
+        
+        button = Button(
+            label=piece_name,
+            style=discord.ButtonStyle.primary,
+            disabled=not has_legal_moves  # Disable if no legal moves
+        )
 
-        async def piece_callback(interaction_button: discord.Interaction, piece_name=piece_name):
+        async def piece_callback(interaction_button: discord.Interaction, piece_type=piece_type):
+            # Check if the user is the current player
+            if interaction_button.user.id != player_id:
+                await interaction_button.response.send_message(
+                    "It's not your turn!", ephemeral=True
+                )
+                return
+
             # Defer to avoid "This interaction failed" if the logic takes time
             await interaction_button.response.defer()
-            await show_move_options(interaction_button, player, PIECE_TYPES[piece_name])
+            await show_move_options(interaction_button, player, piece_type)
 
         button.callback = piece_callback
         view.add_item(button)
@@ -79,6 +99,8 @@ async def show_piece_selection(interaction: discord.Interaction, player_id: int)
         content=f"{player.mention}, select a piece type to move:",
         view=view
     )
+
+
 
 
 
